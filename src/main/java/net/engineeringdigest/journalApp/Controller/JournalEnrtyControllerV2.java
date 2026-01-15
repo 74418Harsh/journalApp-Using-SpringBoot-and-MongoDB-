@@ -10,15 +10,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/journal")
-public class JournalEnrtyController {
+@RequestMapping("/XYX")
+public class JournalEnrtyControllerV2 {
 
     @Autowired
     JournalEntryService journalEntryService;
+    //METHOD INSIDE A CONTROLLER CLASS SHOULD BE PUBLIC SO THAT THEY CAN BE ACCESSED AND INVOKED BY THE SPRING FRAMEWORK OR EXTERNAL HTTP REQUESTS
 
     @Autowired
     private UserService userService;
@@ -33,10 +34,15 @@ public class JournalEnrtyController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    //Selecting "raw" and "JSON"in the body of a POST request in Postman indicates that the request body will contain
+    //data in JSON format,allowing the server to parse and process the incoming data accurately. This ensures that the data is
+    //transmitted and recived in a structured manner,following the JSON format conventions.
+
 
     @PostMapping("{userName}")
     public ResponseEntity<JournalEntry> createEntry(@RequestBody JournalEntry myENtry, @PathVariable String userName)
     {
+        //RequestBody:It is Saying like that="Hey SPRING,please take the data from the request and turn it into a JAVA object that i can use in my code
         try
         {
             journalEntryService.saveEntry(myENtry,userName);

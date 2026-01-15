@@ -1,9 +1,6 @@
 package net.engineeringdigest.journalApp.entity;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -14,6 +11,7 @@ import java.util.Date;
 @Builder
 @Document(collection = "journal_entries")
 @Data
+@NoArgsConstructor
 public class JournalEntry {
     @Id
     private ObjectId id;
